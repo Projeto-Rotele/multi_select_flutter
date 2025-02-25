@@ -17,6 +17,8 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
   /// Set text that is displayed on the button.
   final Text? buttonText;
 
+  final Widget? qtdeFiltro;
+
   /// Specify the button icon.
   final Icon? buttonIcon;
 
@@ -111,6 +113,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
     required this.onConfirm,
     this.title,
     this.buttonText,
+    this.qtdeFiltro,
     this.buttonIcon,
     this.listType,
     this.decoration,
@@ -153,6 +156,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
                 title: title,
                 items: items,
                 buttonText: buttonText,
+                qtdeFiltro: qtdeFiltro,
                 buttonIcon: buttonIcon,
                 chipDisplay: chipDisplay,
                 decoration: decoration,
@@ -190,6 +194,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
   final MultiSelectListType? listType;
   final BoxDecoration? decoration;
   final Text? buttonText;
+  final Widget? qtdeFiltro;
   final Icon? buttonIcon;
   final Widget? title;
   final List<MultiSelectItem<V>> items;
@@ -223,6 +228,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
     required this.items,
     this.title,
     this.buttonText,
+    this.qtdeFiltro,
     this.buttonIcon,
     this.listType,
     this.decoration,
@@ -258,6 +264,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
       : items = field.items,
         title = field.title,
         buttonText = field.buttonText,
+        qtdeFiltro = field.qtdeFiltro,
         buttonIcon = field.buttonIcon,
         listType = field.listType,
         decoration = field.decoration,
@@ -453,7 +460,13 @@ class __MultiSelectDialogFieldViewState<V>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                widget.buttonText ?? const Text("Select"),
+                Visibility(
+                  visible: widget.qtdeFiltro != null,
+                  child: widget.qtdeFiltro!,
+                ),
+                Expanded(
+                  child: widget.buttonText ?? const Text("Select"),
+                ),
                 widget.buttonIcon ?? const Icon(Icons.arrow_downward),
               ],
             ),
