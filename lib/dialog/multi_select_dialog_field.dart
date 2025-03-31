@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../util/multi_select_list_type.dart';
 import '../util/multi_select_item.dart';
 import '../chip_display/multi_select_chip_display.dart';
-import 'mult_select_dialog.dart';
+import 'multi_select_dialog.dart';
+import 'package:badges/badges.dart' as badges;
 
 /// A customizable InkWell widget that opens the MultiSelectDialog
 // ignore: must_be_immutable
@@ -17,7 +18,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
   /// Set text that is displayed on the button.
   final Text? buttonText;
 
-  final Widget? qtdeFiltro;
+  final String? qtdeFiltro;
 
   /// Specify the button icon.
   final Icon? buttonIcon;
@@ -194,7 +195,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
   final MultiSelectListType? listType;
   final BoxDecoration? decoration;
   final Text? buttonText;
-  final Widget? qtdeFiltro;
+  final String? qtdeFiltro;
   final Icon? buttonIcon;
   final Widget? title;
   final List<MultiSelectItem<V>> items;
@@ -457,18 +458,35 @@ class __MultiSelectDialogFieldViewState<V>
                     )
                 : widget.decoration,
             padding: const EdgeInsets.all(10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Visibility(
-                  visible: widget.qtdeFiltro != null,
-                  child: widget.qtdeFiltro!,
-                ),
-                Expanded(
-                  child: widget.buttonText ?? const Text("Select"),
-                ),
-                widget.buttonIcon ?? const Icon(Icons.arrow_downward),
-              ],
+            child: Visibility(
+              visible: widget.qtdeFiltro != null,
+              replacement: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  widget.buttonText ?? const Text("Select"),
+                  widget.buttonIcon ?? const Icon(Icons.arrow_downward),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  badges.Badge(
+                    badgeContent: Text(
+                      widget.qtdeFiltro ?? '',
+                      textAlign: TextAlign.center,
+                    ),
+                    badgeStyle: const badges.BadgeStyle(
+                      badgeColor: Color(0xFFf8cd84),
+                      padding:
+                          EdgeInsets.only(bottom: 3, left: 3, right: 3, top: 3),
+                    ),
+                  ),
+                  Expanded(
+                    child: widget.buttonText ?? const Text("Select"),
+                  ),
+                  widget.buttonIcon ?? const Icon(Icons.arrow_downward),
+                ],
+              ),
             ),
           ),
         ),
