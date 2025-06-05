@@ -463,7 +463,9 @@ class __MultiSelectDialogFieldViewState<V>
               replacement: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  widget.buttonText ?? const Text("Select"),
+                  Expanded(
+                    child: widget.buttonText ?? const Text("Select"),
+                  ),
                   widget.buttonIcon ?? const Icon(Icons.arrow_downward),
                 ],
               ),
