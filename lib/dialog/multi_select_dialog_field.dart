@@ -19,6 +19,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
   final Text? buttonText;
 
   final String? qtdeFiltro;
+  final Color? colorFiltro;
 
   /// Specify the button icon.
   final Icon? buttonIcon;
@@ -115,6 +116,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
     this.title,
     this.buttonText,
     this.qtdeFiltro,
+    this.colorFiltro,
     this.buttonIcon,
     this.listType,
     this.decoration,
@@ -158,6 +160,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
                 items: items,
                 buttonText: buttonText,
                 qtdeFiltro: qtdeFiltro,
+                colorFiltro: colorFiltro,
                 buttonIcon: buttonIcon,
                 chipDisplay: chipDisplay,
                 decoration: decoration,
@@ -196,6 +199,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
   final BoxDecoration? decoration;
   final Text? buttonText;
   final String? qtdeFiltro;
+  final Color? colorFiltro;
   final Icon? buttonIcon;
   final Widget? title;
   final List<MultiSelectItem<V>> items;
@@ -230,6 +234,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
     this.title,
     this.buttonText,
     this.qtdeFiltro,
+    this.colorFiltro,
     this.buttonIcon,
     this.listType,
     this.decoration,
@@ -266,6 +271,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
         title = field.title,
         buttonText = field.buttonText,
         qtdeFiltro = field.qtdeFiltro,
+        colorFiltro = field.colorFiltro,
         buttonIcon = field.buttonIcon,
         listType = field.listType,
         decoration = field.decoration,
@@ -477,8 +483,9 @@ class __MultiSelectDialogFieldViewState<V>
                       widget.qtdeFiltro ?? '',
                       textAlign: TextAlign.center,
                     ),
-                    badgeStyle: const badges.BadgeStyle(
-                      badgeColor: Color(0xFFf8cd84),
+                    badgeStyle: badges.BadgeStyle(
+                      badgeColor:
+                          widget.colorFiltro ?? Theme.of(context).primaryColor,
                       padding:
                           EdgeInsets.only(bottom: 3, left: 3, right: 3, top: 3),
                     ),
